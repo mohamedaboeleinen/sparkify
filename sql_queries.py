@@ -34,14 +34,14 @@ user_table_create = ("""CREATE TABLE IF NOT EXISTS users (
 song_table_create = ("""CREATE TABLE IF NOT EXISTS songs (
                         song_id int PRIMARY KEY,
                         title varchar, 
-                        artist_id int, 
+                        artist_id varchar, 
                         year int, 
                         duration int
 );
 """)
 
 artist_table_create = ("""CREATE TABLE IF NOT EXISTS artists (
-                        artist_id int PRIMARY KEY,
+                        artist_id varchar PRIMARY KEY,
                         name varchar, 
                         location varchar, 
                         latitude int, 
