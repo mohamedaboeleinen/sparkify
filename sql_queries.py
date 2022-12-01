@@ -32,7 +32,7 @@ user_table_create = ("""CREATE TABLE IF NOT EXISTS users (
 """)
 
 song_table_create = ("""CREATE TABLE IF NOT EXISTS songs (
-                        song_id int PRIMARY KEY,
+                        song_id varchar PRIMARY KEY,
                         title varchar, 
                         artist_id varchar, 
                         year int, 
@@ -41,7 +41,7 @@ song_table_create = ("""CREATE TABLE IF NOT EXISTS songs (
 """)
 
 artist_table_create = ("""CREATE TABLE IF NOT EXISTS artists (
-                        artist_id varchar PRIMARY KEY,
+                        artist_id int PRIMARY KEY,
                         name varchar, 
                         location varchar, 
                         latitude int, 
@@ -68,7 +68,7 @@ songplay_table_insert = ("""
 user_table_insert = ("""
 """)
 
-song_table_insert = ("""
+song_table_insert = ("""INSERT INTO songs(song_id, title, artist_id, year, duration) VALUES (%s,%s,%s,%s,%s)
 """)
 
 artist_table_insert = ("""
