@@ -24,5 +24,8 @@ contains the sql queries to drop and create the database tables and also the ins
 ### test.ipynb
 This is used to verify that the data has been inserted to the database and for sanity checks before submitting the project. 
 ## How to run the python scripts? 
-´´´python create_tables.py ´´´
-´´´ python etl.py ´´´
+
+~~~ 
+    python create_tables.py 
+    
+    python etl.py
