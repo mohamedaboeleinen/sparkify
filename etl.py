@@ -6,6 +6,17 @@ from sql_queries import *
 
 
 def process_song_file(cur, filepath):
+    '''
+    process song files and pushes the data to the song and artist tables. 
+
+    read data into a dataframe in a given file and pushes the relevant data to song and artist dimension tables. 
+
+    Parameters
+    ----------
+
+    cur: database cusrsor 
+    filepath: path to a songs datafile
+    '''
     # open song file
     df = pd.read_json(filepath, lines=True)
     for index, entry in df.iterrows():
@@ -21,6 +32,19 @@ def process_song_file(cur, filepath):
 
 
 def process_log_file(cur, filepath):
+    '''
+    process log files and pushes the data to the time, users  and songplays tables. 
+
+    read data into a dataframe in a given file and pushes the relevant data to time and users dimension tables, 
+    as the data for the artist_id and song_id is not available in the log_file and needed for songplays table, we fetch them 
+    from the songs and artists tables.  
+
+    Parameters
+    ----------
+
+    cur: database cusrsor 
+    filepath: path to a log datafile
+    '''
     # open log file
     df = pd.read_json(filepath, lines=True)
 
@@ -66,6 +90,21 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
+
+    '''
+    get all json files from a given directory calls the relevant processing function
+
+    This function gets the path to all the .json files in a given directory and depending on the 
+    func parameter calls the relevant processing function passing the paths to the files to it.
+
+    Parameters
+    ----------
+
+    cur: cursor
+    conn: connection to the database
+    filepath: filepath to the directory where the data files reside
+    func: could be process_song_file or process_log_file 
+    '''
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -85,6 +124,14 @@ def process_data(cur, conn, filepath, func):
 
 
 def main():
+    '''
+    main function of the etl.py
+
+    This function creates the connection to the db, gets the cursor and calls 
+    the process data two times. once to process log files and another to process log files
+    then it closes the connection to the database
+
+    '''
     conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
 
